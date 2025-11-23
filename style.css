@@ -1,95 +1,75 @@
-/* style.css - 禅意风格核心代码 */
+/* style.css - 支持日夜模式 */
 
 :root {
-    /* 配色：羊皮纸与旧墨水 */
-    --bg-color: #F9F5F1;       /* 米色背景 */
-    --text-color: #433E3B;     /* 深褐灰字体 */
-    --link-color: #9A5B4A;     /* 铁锈红链接 */
-    --accent-color: #D6CFC7;   /* 装饰线条颜色 */
+    /* --- 默认：白天模式 (羊皮纸暖色) --- */
+    --bg-color: #F9F5F1;
+    --text-color: #433E3B;
+    --link-color: #9A5B4A;
+    --accent-color: #D6CFC7;
+    --code-bg: #EFEBE4;
+    
+    /* 字体保持不变 */
     --font-serif: "Georgia", "Times New Roman", "Songti SC", serif;
     --font-mono: "Courier New", monospace;
 }
 
+/* --- 黑夜模式 (深夜阅读模式) --- */
+/* 当网页标签上有 data-theme="dark" 时生效 */
+[data-theme="dark"] {
+    --bg-color: #252423;       /* 深炭灰，不刺眼 */
+    --text-color: #C0B6AD;     /* 灰白色文字 */
+    --link-color: #D48872;     /* 亮一点的铁锈红 */
+    --accent-color: #4A4643;   /* 深色分割线 */
+    --code-bg: #302E2C;
+}
+
+/* 基础样式 (引用上面的变量) */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-serif);
     line-height: 1.8;
-    max-width: 650px;          /* 限制宽度，模拟书页 */
-    margin: 0 auto;            /* 居中 */
+    max-width: 650px;
+    margin: 0 auto;
     padding: 3rem 1.5rem;
+    transition: background-color 0.5s ease, color 0.5s ease; /* 切换时有柔和的过渡动画 */
 }
 
-/* 头部导航 */
+/* 头部布局 */
 header {
+    display: flex;
+    justify-content: space-between; /* 让标题和按钮分居左右 */
+    align-items: center;
     margin-bottom: 4rem;
     border-bottom: 2px solid var(--accent-color);
     padding-bottom: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
 }
 
-header h1 {
-    font-size: 1.5rem;
-    font-weight: normal;
-    margin: 0;
-}
+header h1 { margin: 0; font-size: 1.5rem; font-weight: normal; }
 
-nav a {
-    margin-left: 1rem;
+/* 切换按钮样式 */
+#theme-toggle {
+    background: none;
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-serif);
     font-size: 0.9rem;
+    transition: all 0.3s;
 }
 
-/* 链接样式 */
-a {
-    color: var(--link-color);
-    text-decoration: none;
-    border-bottom: 1px dashed var(--link-color);
-    transition: all 0.2s;
+#theme-toggle:hover {
+    background-color: var(--accent-color);
 }
 
-a:hover {
-    background-color: rgba(154, 91, 74, 0.1);
-    border-bottom-style: solid;
-}
-
-/* 文章列表样式 (首页用) */
-.post-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 1rem;
-    border-bottom: 1px dotted var(--accent-color);
-    padding-bottom: 0.5rem;
-}
-
-.post-date {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: #888;
-}
-
-/* 文章正文样式 */
-article h2 { margin-top: 2rem; font-size: 1.3rem; }
-article p { margin-bottom: 1.5rem; }
-article blockquote {
-    border-left: 3px solid var(--link-color);
-    margin-left: 0;
-    padding-left: 1rem;
-    font-style: italic;
-    color: #666;
-}
-
-/* 底部 */
-footer {
-    margin-top: 5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--accent-color);
-    font-size: 0.8rem;
-    text-align: center;
-    color: #999;
-}
+/* 其他链接和文章样式保持一致 */
+a { color: var(--link-color); text-decoration: none; border-bottom: 1px dashed var(--link-color); transition: all 0.2s; }
+a:hover { background-color: rgba(154, 91, 74, 0.1); border-bottom-style: solid; }
+.post-item { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; border-bottom: 1px dotted var(--accent-color); padding-bottom: 0.5rem; }
+.post-date { font-family: var(--font-mono); font-size: 0.85rem; color: #888; }
+footer { margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--accent-color); font-size: 0.8rem; text-align: center; color: #999; }
 
 /* 打字机动画 */
 .typewriter {
