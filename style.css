@@ -90,3 +90,24 @@ footer {
     text-align: center;
     color: #999;
 }
+/* 打字机动画 */
+.typewriter {
+  overflow: hidden; /* 隐藏超出部分 */
+  border-right: .15em solid orange; /* 光标 */
+  white-space: nowrap; /* 不换行 */
+  margin: 0 auto;
+  letter-spacing: .15em;
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* 动画定义 */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
